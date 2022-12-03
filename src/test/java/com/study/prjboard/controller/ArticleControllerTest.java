@@ -1,5 +1,6 @@
 package com.study.prjboard.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ class ArticleControllerTest {
                 .andExpect(model().attributeExists("articleComments"));
     }
 
+    @Disabled
     @DisplayName("[view][GET] 게시글 검색 전용 페이지 - 정상 호출")
     @Test
     public void givenNothing_whenRequestingArticleSearchView_thenReturnsArticleSearchView() throws Exception {
@@ -60,6 +62,7 @@ class ArticleControllerTest {
                 .andExpect(view().name("articles/search"));
     }
 
+    @Disabled
     @DisplayName("[view][GET] 게시글 hashtag 검색 페이지 - 정상 호출")
     @Test
     public void givenNothing_whenRequestingArticleHashtagSearchView_thenReturnsArticleHashtagSearchView() throws Exception {
