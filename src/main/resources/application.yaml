@@ -15,7 +15,6 @@ spring:
     properties:
       hibernate.format_sql: true
       hibernate.default_batch_fetch_size: 100
-    #database: mysql
   sql.init.mode: always
   data.rest:
     base-path: /api
@@ -29,4 +28,3 @@ spring:
 #    username: sa
 #    driver-class-name: org.h2.Driver
   h2.console.enabled: false
-
