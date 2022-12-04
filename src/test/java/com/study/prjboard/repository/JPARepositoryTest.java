@@ -27,7 +27,7 @@ class JPARepositoryTest {
     public JPARepositoryTest(
             @Autowired ArticleRepository articleRepository,
             @Autowired ArticleCommentRepository articleCommentRepository,
-            @Autowired UserAccountRepository userAccountRepository{
+            @Autowired UserAccountRepository userAccountRepository){
         this.articleRepository = articleRepository;
         this.articleCommentRepository = articleCommentRepository;
         this.userAccountRepository = userAccountRepository;
