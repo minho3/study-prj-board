@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled("Spring Data REST 통합 테스트는 불필요하므로 제외시킴")
+//@Disabled("Spring Data REST 통합 테스트는 불필요하므로 제외시킴")
 @DisplayName("DataREST - API 테스트")
 @Transactional
 @AutoConfigureMockMvc
@@ -105,6 +105,7 @@ public class DataRestTest {
 
     }
 
+    @Disabled
     @DisplayName("[api] 회원 관련 API 는 일체 제공하지 않는다.")
     @Test
     void givenNothing_whenRequestingUserAccounts_thenThrowsException() throws Exception {

@@ -99,6 +99,7 @@ class ArticleControllerTest {
         Long articleId = 1L;
         Long totalCount = 1L;
         given(articleService.getArticle(articleId)).willReturn(createArticleWithCommentDto());
+        given(articleService.getArticleCount()).willReturn(totalCount);
         //When & Then
         mvc.perform(get("/articles/" + articleId))
                 .andExpect(status().isOk())

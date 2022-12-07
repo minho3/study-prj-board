@@ -37,7 +37,7 @@ public record ArticleWithCommentsResponse(
                 dto.createdAt(),
                 dto.userAccountDto().email(),
                 nickname,
-                dto.articleCommentDtos().stream()
+                dto.articleCommentDto().stream()
                         .map(ArticleCommentResponse::from)
                         .collect(Collectors.toCollection(LinkedHashSet::new))
         );

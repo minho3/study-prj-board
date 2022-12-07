@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public record ArticleWithCommentsDto(
         Long id,
         UserAccountDto userAccountDto,
-        Set<ArticleCommentDto> articleCommentDtos,
+        Set<ArticleCommentDto> articleCommentDto,
         String title,
         String content,
         String hashtag,
