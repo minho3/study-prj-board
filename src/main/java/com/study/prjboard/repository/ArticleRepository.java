@@ -4,6 +4,7 @@ import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import com.study.prjboard.domain.Article;
 import com.study.prjboard.domain.QArticle;
+import com.study.prjboard.repository.querydsl.ArticleRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface ArticleRepository extends
-        JpaRepository<Article, Long>
+        JpaRepository<Article, Long>,
+        ArticleRepositoryCustom
         ,QuerydslPredicateExecutor<Article> //기본적으로 Article안에 있는 모든 entity에 대한 기본 검색
         ,QuerydslBinderCustomizer<QArticle> {
     Page<Article> findByTitleContaining(String title, Pageable pageable);
