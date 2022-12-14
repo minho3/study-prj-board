@@ -5,9 +5,6 @@ import com.study.prjboard.domain.ArticleComment;
 
 import java.time.LocalDateTime;
 
-/**
- * A DTO for the {@link com.study.prjboard.domain.ArticleComment} entity
- */
 public record ArticleCommentDto(
         Long id,
         Long articleId,
@@ -17,7 +14,7 @@ public record ArticleCommentDto(
         String createdBy,
         LocalDateTime modifiedAt,
         String modifiedBy
-        ) {
+) {
     public static ArticleCommentDto of(Long id, Long articleId, UserAccountDto userAccountDto, String content, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String modifiedBy) {
         return new ArticleCommentDto(id, articleId, userAccountDto, content, createdAt, createdBy, modifiedAt, modifiedBy);
     }
@@ -42,4 +39,5 @@ public record ArticleCommentDto(
                 content
         );
     }
+
 }

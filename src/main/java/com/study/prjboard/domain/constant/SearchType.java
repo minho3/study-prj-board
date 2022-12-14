@@ -1,4 +1,4 @@
-package com.study.prjboard.domain.type;
+package com.study.prjboard.domain.constant;
 
 import lombok.Getter;
 

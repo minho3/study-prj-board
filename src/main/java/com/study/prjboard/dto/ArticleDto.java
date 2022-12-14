@@ -1,12 +1,9 @@
 package com.study.prjboard.dto;
 
 import com.study.prjboard.domain.Article;
-
+import com.study.prjboard.domain.UserAccount;
 import java.time.LocalDateTime;
 
-/**
- * A DTO for the {@link com.study.prjboard.domain.Article} entity
- */
 public record ArticleDto(
         Long id,
         UserAccountDto userAccountDto,
@@ -16,7 +13,13 @@ public record ArticleDto(
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
-        String modifiedBy) {
+        String modifiedBy
+) {
+
+    public static ArticleDto of(UserAccountDto userAccountDto, String title, String content, String hashtag) {
+        return new ArticleDto(null, userAccountDto, title, content, hashtag, null, null, null, null);
+    }
+
     public static ArticleDto of(Long id, UserAccountDto userAccountDto, String title, String content, String hashtag, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String modifiedBy) {
         return new ArticleDto(id, userAccountDto, title, content, hashtag, createdAt, createdBy, modifiedAt, modifiedBy);
     }
@@ -35,12 +38,13 @@ public record ArticleDto(
         );
     }
 
-    public Article toEntity() {
+    public Article toEntity(UserAccount userAccount) {
         return Article.of(
-                userAccountDto.toEntity(),
+                userAccount,
                 title,
                 content,
                 hashtag
         );
     }
+
 }
