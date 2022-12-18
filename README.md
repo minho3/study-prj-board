@@ -30,6 +30,6 @@ Spring Boot
 * BootStrap 5.2.0-Beta1
 * Heroku
 
-##데모페이지
+## 데모페이지
 
-(작성중)
+https://study-prj-board.herokuapp.com/
