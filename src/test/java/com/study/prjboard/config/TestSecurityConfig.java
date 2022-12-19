@@ -13,16 +13,18 @@ import static org.mockito.BDDMockito.given;
 
 @Import(SecurityConfig.class)
 public class TestSecurityConfig {
+
     @MockBean private UserAccountRepository userAccountRepository;
 
     @BeforeTestMethod
-    public void securitySetup(){
+    public void securitySetUp() {
         given(userAccountRepository.findById(anyString())).willReturn(Optional.of(UserAccount.of(
-           "unoTest",
-           "pw",
-           "uno-test@emaill.com",
-           "uni-test",
-           "test memo"
+                "unoTest",
+                "pw",
+                "uno-test@email.com",
+                "uno-test",
+                "test memo"
         )));
     }
+
 }

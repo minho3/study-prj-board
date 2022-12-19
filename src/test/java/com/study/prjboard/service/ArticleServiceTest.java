@@ -71,9 +71,10 @@ class ArticleServiceTest {
 
     @DisplayName("검색어 없이 게시글을 해시태그 검색하면, 빈 페이지를 반환한다.")
     @Test
-    void givenSearchParameters_whenSearchingArticlesViaHashtag_thenReturnsEmptyPage() {
+    void givenNoSearchParameters_whenSearchingArticlesViaHashtag_thenReturnsEmptyPage() {
         // Given
         Pageable pageable = Pageable.ofSize(20);
+
         // When
         Page<ArticleDto> articles = sut.searchArticlesViaHashtag(null, pageable);
 
@@ -82,20 +83,22 @@ class ArticleServiceTest {
         then(articleRepository).shouldHaveNoInteractions();
     }
 
-    @DisplayName("게시글을 해시태그 검색하면, 게시글 페이지를 반환한다..")
+    @DisplayName("게시글을 해시태그 검색하면, 게시글 페이지를 반환한다.")
     @Test
     void givenHashtag_whenSearchingArticlesViaHashtag_thenReturnsArticlesPage() {
         // Given
         String hashtag = "#java";
         Pageable pageable = Pageable.ofSize(20);
-        given(articleRepository.findByHashtag(hashtag,pageable)).willReturn(Page.empty(pageable));
+        given(articleRepository.findByHashtag(hashtag, pageable)).willReturn(Page.empty(pageable));
+
         // When
         Page<ArticleDto> articles = sut.searchArticlesViaHashtag(hashtag, pageable);
 
         // Then
         assertThat(articles).isEqualTo(Page.empty(pageable));
-        then(articleRepository).should().findByHashtag(hashtag,pageable);
+        then(articleRepository).should().findByHashtag(hashtag, pageable);
     }
+
     @DisplayName("게시글 ID로 조회하면, 댓글 달긴 게시글을 반환한다.")
     @Test
     void givenArticleId_whenSearchingArticleWithComments_thenReturnsArticleWithComments() {
@@ -203,7 +206,6 @@ class ArticleServiceTest {
                 .hasFieldOrPropertyWithValue("hashtag", dto.hashtag());
         then(articleRepository).should().getReferenceById(dto.id());
         then(userAccountRepository).should().getReferenceById(dto.userAccountDto().userId());
-
     }
 
     @DisplayName("없는 게시글의 수정 정보를 입력하면, 경고 로그를 찍고 아무 것도 하지 않는다.")
@@ -225,17 +227,15 @@ class ArticleServiceTest {
     void givenArticleId_whenDeletingArticle_thenDeletesArticle() {
         // Given
         Long articleId = 1L;
-        String userId="uno";
-        willDoNothing().given(articleRepository).deleteByIdAndUserAccount_UserId(articleId,userId);
+        String userId = "uno";
+        willDoNothing().given(articleRepository).deleteByIdAndUserAccount_UserId(articleId, userId);
 
         // When
-        sut.deleteArticle(1L,userId);
+        sut.deleteArticle(1L, userId);
 
         // Then
         then(articleRepository).should().deleteByIdAndUserAccount_UserId(articleId, userId);
     }
-
-
 
     @DisplayName("게시글 수를 조회하면, 게시글 수를 반환한다")
     @Test
@@ -254,17 +254,19 @@ class ArticleServiceTest {
 
     @DisplayName("해시태그를 조회하면, 유니크 해시태그 리스트를 반환한다")
     @Test
-    void givenNothing_whenCalling_thenReturnsHashtags(){
-        //given
-        List<String> expectedHahstags = List.of("#java","#spring","#boot");
-        given(articleRepository.findAllDistinctHashtags()).willReturn(expectedHahstags);
-        //when
+    void givenNothing_whenCalling_thenReturnsHashtags() {
+        // Given
+        List<String> expectedHashtags = List.of("#java", "#spring", "#boot");
+        given(articleRepository.findAllDistinctHashtags()).willReturn(expectedHashtags);
+
+        // When
         List<String> actualHashtags = sut.getHashtags();
 
-        //then
-        assertThat(actualHashtags).isEqualTo(expectedHahstags);
+        // Then
+        assertThat(actualHashtags).isEqualTo(expectedHashtags);
         then(articleRepository).should().findAllDistinctHashtags();
     }
+
 
     private UserAccount createUserAccount() {
         return UserAccount.of(
@@ -289,12 +291,12 @@ class ArticleServiceTest {
     }
 
     private ArticleDto createArticleDto() {
-
         return createArticleDto("title", "content", "#java");
     }
 
     private ArticleDto createArticleDto(String title, String content, String hashtag) {
-        return ArticleDto.of(1L,
+        return ArticleDto.of(
+                1L,
                 createUserAccountDto(),
                 title,
                 content,

@@ -20,7 +20,6 @@ public record BoardPrincipal(
 ) implements UserDetails {
 
     public static BoardPrincipal of(String username, String password, String email, String nickname, String memo) {
-
         Set<RoleType> roleTypes = Set.of(RoleType.USER);
 
         return new BoardPrincipal(
@@ -29,14 +28,15 @@ public record BoardPrincipal(
                 roleTypes.stream()
                         .map(RoleType::getName)
                         .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toUnmodifiableSet()),
+                        .collect(Collectors.toUnmodifiableSet())
+                ,
                 email,
                 nickname,
                 memo
         );
     }
 
-    public static BoardPrincipal from(UserAccountDto dto){
+    public static BoardPrincipal from(UserAccountDto dto) {
         return BoardPrincipal.of(
                 dto.userId(),
                 dto.userPassword(),
@@ -46,7 +46,7 @@ public record BoardPrincipal(
         );
     }
 
-    public UserAccountDto toDto(){
+    public UserAccountDto toDto() {
         return UserAccountDto.of(
                 username,
                 password,
@@ -55,6 +55,7 @@ public record BoardPrincipal(
                 memo
         );
     }
+
 
     @Override public String getUsername() { return username; }
     @Override public String getPassword() { return password; }
@@ -65,11 +66,13 @@ public record BoardPrincipal(
     @Override public boolean isCredentialsNonExpired() { return true; }
     @Override public boolean isEnabled() { return true; }
 
-    public enum RoleType{
+
+    public enum RoleType {
         USER("ROLE_USER");
 
         @Getter private final String name;
-        RoleType(String name){
+
+        RoleType(String name) {
             this.name = name;
         }
     }

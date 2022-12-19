@@ -84,8 +84,9 @@ public class ArticleController {
     }
 
     @PostMapping ("/form")
-    public String postNewArticle(ArticleRequest articleRequest,
-                                 @AuthenticationPrincipal BoardPrincipal boardPrincipal
+    public String postNewArticle(
+            @AuthenticationPrincipal BoardPrincipal boardPrincipal,
+            ArticleRequest articleRequest
     ) {
         articleService.saveArticle(articleRequest.toDto(boardPrincipal.toDto()));
 
@@ -103,9 +104,10 @@ public class ArticleController {
     }
 
     @PostMapping ("/{articleId}/form")
-    public String updateArticle(@PathVariable Long articleId,
-                                ArticleRequest articleRequest,
-                                @AuthenticationPrincipal BoardPrincipal boardPrincipal
+    public String updateArticle(
+            @PathVariable Long articleId,
+            @AuthenticationPrincipal BoardPrincipal boardPrincipal,
+            ArticleRequest articleRequest
     ) {
         articleService.updateArticle(articleId, articleRequest.toDto(boardPrincipal.toDto()));
 
@@ -116,7 +118,7 @@ public class ArticleController {
     public String deleteArticle(
             @PathVariable Long articleId,
             @AuthenticationPrincipal BoardPrincipal boardPrincipal
-            ) {
+    ) {
         articleService.deleteArticle(articleId, boardPrincipal.getUsername());
 
         return "redirect:/articles";

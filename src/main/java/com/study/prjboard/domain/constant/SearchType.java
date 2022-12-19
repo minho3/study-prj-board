@@ -14,4 +14,5 @@ public enum SearchType {
     SearchType(String description) {
         this.description = description;
     }
+
 }
